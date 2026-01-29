@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل حرفه‌ای کانفیگ NPV Tunnel</title>
+    <style>
+        :root {
+            --bg-main: #0a0f1c;
+            --bg-card: rgba(20, 30, 60, 0.75);
+            --accent-primary: #00d4ff;
+            --accent-secondary: #ff00aa;
+            --accent-third: #00ff9d;
+            --text-primary: #e0f7ff;
+            --text-secondary: #b0e0ff;
+            --border-glow: rgba(0, 212, 255, 0.45);
+            --shadow-glow: 0 0 28px rgba(0, 212, 255, 0.4);
+            --gradient-bg: linear-gradient(135deg, #0a0f1c, #001f3f, #0a0f1c);
+        }
+
+        body.light-mode {
+            --bg-main: #f0f8ff;
+            --bg-card: rgba(255, 255, 255, 0.94);
+            --accent-primary: #0066cc;
+            --accent-secondary: #cc0066;
+            --accent-third: #00aa66;
+            --text-primary: #001f3f;
+            --text-secondary: #004080;
+            --border-glow: rgba(0, 102, 204, 0.35);
+            --shadow-glow: 0 6px 24px rgba(0, 102, 204, 0.25);
+            --gradient-bg: linear-gradient(135deg, #e6f0ff, #cce0ff, #e6f0ff);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-attachment: fixed;
+            transition: all 0.4s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(0,212,255,0.09) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(255,0,170,0.07) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f3f, #000d1a);
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 12px 50px rgba(0,0,0,0.7);
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        header h1 {
+            font-size: 3.6em;
+            margin: 0;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-third));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(0,212,255,0.6);
+        }
+
+        .tagline {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: var(--accent-third);
+            text-shadow: 0 0 15px rgba(0,255,157,0.5);
+        }
+
+        .mode-switch {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid var(--accent-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .mode-switch:hover {
+            background: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: -70px auto 80px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            box-shadow: var(--shadow-glow), 0 10px 40px rgba(0,0,0,0.45);
+            transition: all 0.35s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0,212,255,0.3);
+        }
+
+        .card h2 {
+            font-size: 2.1em;
+            margin: 0 0 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--accent-primary);
+            color: var(--accent-primary);
+            text-shadow: 0 0 12px rgba(0,212,255,0.5);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--accent-primary), #0099cc);
+            color: white;
+            border: none;
+            padding: 15px 36px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.15em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 6px 18px rgba(0,212,255,0.45);
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(0,212,255,0.7);
+        }
+
+        .btn-pink {
+            background: linear-gradient(45deg, var(--accent-secondary), #cc0099);
+            box-shadow: 0 6px 18px rgba(255,0,170,0.45);
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #28a745, #34d058);
+            box-shadow: 0 4px 12px rgba(40,167,69,0.4);
+            padding: 9px 24px;
+            border-radius: 50px;
+            font-size: 0.95em;
+            min-width: 140px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(40,167,69,0.6);
+        }
+
+        .fab-support {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0088cc, #00aaff);
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .fab-support:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.9);
+        }
+
+        .fab-support::before {
+            content: "پشتیبانی";
+            position: absolute;
+            top: -38px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .fab-support:hover::before {
+            opacity: 1;
+        }
+
+        .fab-support svg {
+            width: 44px;
+            height: 44px;
+            fill: white;
+        }
+
+        .table-wrapper {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        th {
+            background: transparent;
+            color: var(--accent-primary);
+            border-bottom: 2px solid var(--accent-primary);
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        td {
+            background: transparent;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+            transition: background 0.2s;
+            font-size: 0.95em;
+        }
+
+        tr:hover td {
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        td:first-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .list-title {
+            font-size: 1.7em;
+            color: var(--accent-third);
+            text-align: center;
+            margin: 20px 0 30px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #001f3f, #000d1a);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 35px;
+            margin-top: 70px;
+            border-top: 1px solid var(--border-glow);
+        }
+
+        .accordion-item {
+            margin-bottom: 16px;
+        }
+
+        .accordion-header {
+            background: rgba(30, 45, 80, 0.7);
+            padding: 16px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid var(--border-glow);
+        }
+
+        .accordion-header:hover,
+        .accordion-header.active {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            background: rgba(20, 35, 70, 0.4);
+            border-radius: 0 0 12px 12px;
+            border: 1px solid var(--border-glow);
+            border-top: none;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.8em; }
+            .tagline { font-size: 1.4em; }
+            .fab-support { bottom: 20px; right: 20px; width: 65px; height: 65px; }
+            .fab-support svg { width: 38px; height: 38px; }
+            .table-wrapper { max-width: 100%; }
+            th, td { padding: 7px 10px; font-size: 0.92em; }
+            .btn-download { padding: 8px 20px; font-size: 0.9em; min-width: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>پنل حرفه‌ای کانفیگ NPV Tunnel</h1>
+        <div class="tagline">سریع . امن . رایگان . پر سرعت</div>
+        <button class="mode-switch" onclick="toggleMode()">حالت روشن</button>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <div class="list-title">لیست کانفیگ‌های رایگان</div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نام کانفیگ</th>
+                            <th>وضعیت</th>
+                            <th>پینگ</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>France Ultra</td>
+                            <td style="color:#00ff9d;">فعال</td>
+                            <td style="color:#00ff9d;">~28 ms</td>
+                            <td>
+                                <a href="data:text/plain;charset=utf-8;base64,TVBWRVQxCkpjS0c3S2hneDJsdkNJZFFySjFCS3U0PSxRYnJ0R3lMWU9BR0RtQjB5TWN3bWU3Um9takpMUHJNSnA0RzFLTi9DRGRNRHRH SGFEb3RsOUN4NGUxSy9weVRKaHJwSXc2MzU5QUMvd21QdWRLNm5KU1lwbW0wZFlmaFRxWTBGdmo5SzdXK0pLNHh vR1hINm5lbmFnTzhrVHZZQWgwSDVCUWhPLzlHQ3YwV1h6VnNHN01HOi9YNEtQUHd4czNOMzJGVHNTUzRldGN5Q0du aWxiL0FndVJnNDdNQ0RtUGRmaEJtK3VidTF1ejVaV2E5SnFsNjF6SmpOL1JFdjRFS3FHY2RzRE5qUjlFeFQzSHNQc XFWREx3eHllWm1VaWFPYUFaeHBCand3dGpoZFJMdWRORXhZZGp6MWc0WlJDVy9Vclc4WlozYnl3Rjgyc3hSVG0wOEpT QWsyUFl sZkhPT1ZoeDdHbXNsSTJrTUNuNl o1b3FsbVVUY2ZvNzdzYW0vR05VaERuZlo1cG1DR3ZpRTY2QjY2aDJ5NmNsOTN6S09BaHA5Q241eCszb05yM2lleEF rM0dnSForUVcrSTRLdVRmVitXVmpKNHBrSFdEbE1xbkNFYWdxbXJregtIdlhPQWhwOU8reXpXcW9LclM2TTBOazF5Qm NleXU2dENucGlRNXV5VXRNWUorRWlQbE92dlBIZmh2V3JsNFkzb mNPUjk5c3Erb2plWHZjbGY0ZE l4eXpEUVlhZlRHb3NZYnR6Uis0bWI0UDVvdlR6Q2pTdlRYY0tnODQ2QTZ5akdVZmxrOXZ3R25nUUg2TmEreU92MWhv U3hIZmF6VCtjYVFwR0pmNFhoL2RzeCtCbkczVnUzTjJiQWsxNkFpVmp5SmNodHgredjdxVR0WXlPRUpDbDl6SDRRY2JV Mzc4eVA3eVJZOWo4cFlOMC9YeUd6KzZmRjRPWjF0L2gwdn lIS1BWTVpVcHpnY09vZmJ6MkpCUisyUzVCSU9vMHAvK3RVcVR lVUkkrUHl4K0ZySE1PYmtVU0V3YmVnUFNtWVpRUnJMWFVmT1Mvandhb2F1eXpDdlFw d3dBSVA3bVY4Y2JVNzJxYzltek9NYzg5V0QyL3N2ci9GL2NxdFBZLzBuSFhLVVEzcFR1L21icnhXb2VnTit sUG1tWjJjYVZ yL3NqOTFpVEJpSFEvZk1vb2RuSHNnYTJiaGJJaW9QWW0wSHpNTTB rOHVqZS9tY0NvZGZpM1BVeFBtbkI yY2FXOTZkZVI1R0dJaUhRT2FPUitTeWFpQ2NHQkhOWWtkN3M zR0ZxQUFoaS9pcURveDlmV0pIV2dKRTUybEFB SUpxV1U3Kzh4L0dOZ2lIVEtLOFZ3ZG5HbHVmVEZTZU5vT2hoMGdtamt mazg5dHpqeHhxcVpKSjJnSkk1MmxBQUlON01xNmV4QzczU2p2VExoVDVwbWNRLzB5ZW5YUU5Za29oMElIL0xBQWdPLW9 TLzBSai9jaktiT0JscTVINFFOYmNyN3NhbTkxdDNpSFM5WnN3K1JTYTRVdTcvLzdCZHNJaDBZbkxmQUFocGloRHQwVG p5ZngvMmVvQXh5QzVGSjduZDhzL05xRHpJOWlBVG Rzc3Zk bkh0dHIvUVRQNXlkTG94MTA rYVpsRVA5RHp6eHV6K1dwbnVEY2xQbWoxT042U3Q3dEIwcUR3TDltZWJJWlp xSG4zbnU2U05Sck5hRGZnSzRHUFhMbDRQOVBpbGw0MjVLdC8ySTRGMnlpOTJjZXdaNXY4ejQyS2E5bXl4TVlvNFRqYTB US2lWYzdzcHB1QjdwaUdKT1FjeTVjQ2xqbzJ6TW0vc1ljSWczR2hMWVlvRXNmL1A1bU1Xc1RwUE1ZSmtCZy8wTGZQQWdm TjJVcjA1SmsrYVpuWnh1SEh6eHN1b2UrYXBDOXcvNUg1Wko2UUIvTTVXNzNJS3ZUSndZT1IrRUNpS0IvUEdMUDEwcEw4 S3ZDbmtnbDAwZ2lqZXgvOXY1WTFHaEpLOU53UUFJYVlwTDZjOFUx aVNLaUhSRVlPc zVYaWUvdS9yUU5hZzg1WWhwUG5MTU5IWnh7RmEvakczdllxL21ZMDRqNUg0R0QvVEUrTUptNzNRMWlIUk9hT1IrWWp5bGR jR0JPdFlrUTZSbEtYWFViRmc2cG5PejJUTHVZNkg2TWxrbWxqSlBKNHFvNE42azFpVHR1Q1VYZHNXb1F6MnhOc0dCaHZG YWhyVTZpbn pQRlVRZ3M1Zm8wVnpXSk l5eU4vWmc zWEIyY2FWajc5WGErRWh4dVROTU1ZSUFD R3VtN2Y3Rm9icDAxa1E3U0duU09FOW0rS3o0bHBMa1k0K0lkRUpQbWoxR0k3Z3Z2NW4vMWlUS29DSzRQSWx5R3cvMDA3 SC9PZXh2dXJNejdtUEtOVVFuaWtlbi93L3BidWE3TzRCUG1uQjJjYVZPOHRUNXFEeWN0VG82ZHNVaEJHLzB6ZWpiV3Fn ODRZaDBuWDNaUGtZMm11Ni9tVW5yYWxheGVuWXgyek5FTUtOSzc4WVU2WDlIOW16ZUltUVFBQ0N1akh lM2cyT1JseHF Z a1JYM2JKWFp4N0N5eC84bnljd0drQnN4OHdDV i9GNloz cVpDYnFE d1k5Z29nYnNWd1VRLzA5L3pFWWFnOEYvW XlpR0hkUDE0UDlPbkJnY0Q0YWRTN05jeC81SDRRRC9RWTc4YTI3bW1OaUhTcFQ1b3ZUeWVpd3ZQR TM5WWtwYThLUzNmWE1VczZ1TS9wMGYzK1kxNnRDcnNwNUg1L0lMTWJ6ZjlPOXlyZDlqdmhhK1IrRUNpS2tmak5XdWhx UmJBSzRpbmVQVVlnczF2QmdkVGxhSVdoSkhkMjFqOVREL1NTcFlfSG9INUlzQ2E4Zk5ZX1h5R2tCZlBB SnRZaTZreDZ0 ekhBS1U0amhtZnk yNFBmUWtuZ1l0bFBtbVoyeWNZcX M0TjRaOFZyeW9EY0lUNXBtZG5HMHIvTEF5TllrM29oMHhHWFhLRVV3dVVmQmdmek1KRis0TnpGNDBETkdOb3Btc2Y4 TytXTzBvRCtocERzQUNHbXR0ci9Sc3ZsMkdib2w1MCthWmxFUDlQTGsw eFdKTnVJZ E9ObnpDeDJjYXVvc2Y4QjUzUE9pSFFJYU9SK1R6MjNPUEdHRmpkWWtLYkIzTUdEZGNIWnh0ZDN6d0dMNGRN eTZ OZUZwbW1ZU2Y0bzc1ZFlrK2tXMm91alV1WWNvNVJEQ3ZMNytaWTZaYTdxd2pUR1BvTGtVcnJ5RFo4eld+TlNUMmJFZ3 g1SDVYTG92QndZR3A1SFVpOW13V1Q1b3ZUeUdnaXVfUVJhZzg0N GgwOWoySmNodDk1M20vL3J2V0pHVzdKZFJ nNUg0UVFJck4rY3dKNjI5dDdqRklmTjh3VHpLbU51Nk54ZVJhU280S2hIVEhNMzAvczNMdHltNmtZZEM1Q2hvLzVINU9 QYVhNL00vUDdtaEYrakdHZnVSK0VB aUtCcStSeWFRelYrRjQ4RSt hY0ha eDVGV3VqZlNrTUlqaUNvc y81SDRZWSt hUHA1RG51alpRN21jZE1aUUFDR0hpRXEyWkhiz2tPMDBHSEha aEJpaXFIQWp3dW9hYVN4ZUlGOTNYSkZQYk9LOHMxNDFpVD Bqd1JWcFp0QkdMNCtzR0JXWUtMZnBtbENPV2JYWnhrTy9rUXk2TU5MZ1lZM GpnZ1lkK2JqcDVLbHV6ZF I5bnBsTVlwcUdtWHNtS3FUMUxBeUxlUm1FU21KYkJwaWluREFqMjZvWXVlZ2VHaG0yZ0FJYVk wcHY1SzB1elRRNVdSd21vb0FFbistSy9heVJ3R0l6QUN4anZJV05iMnh4aTZ6QmdWZ2lkU0JsT1dQTTFEbHNjZXky d1lGNVlqNmNPbmpDOTVwd2JISHUyNldOc1dJeTdDQjYzWW1LYkFCaTdJK2xsZkp yTWd3MFppU1JnR1FJYTRxbHNm OThmalo1TTJ3Nms0NXNDbWZ1dksyWjRIUStpRFZLc3ZhVUFCS TN1REt6MHBVdFl0QXN PQ25mNUg0S0lQcGd wSTN5WWovUE93b3BoK1IrQVdmdlRL eVNE MkkzSGpCNFI1cUtBQkovoXZDbHFRQjhQUDluYk9YTjNRQVN mNHBJcjVVRGZEeWNZMnh4a3VS K2JYK0tmdjdNMHlGcFN5d3k5TitXT0Y0ZytOTDh6WEVwZm9sc01 3Ym1tWnJEL1J2cW8xWmRDaERMRzZRaVpRQUVtVGhyNldiM0hRb1RGNTBFdmVhYmxGajVMMnJ3VmQyUFB4bk0xR1JpRH BXRC9TNXdZRURMVFlJT0dEVWs0SnNDbUx zZ2Z2R2hDZzhOR1F3UG9ubElVM S9pcW52ekw0NGJ6SmxDcVNSd3dBU043a2MvTW9ESDNLa1l5Skp6TUVBRW1tS1o5VHpZU3BJYzJ3Yk45L2JOR314K2xpLzBi VWdZOWxlZEZud3d3QVNKNisyK1AvOWRscGFaRCtocDl3QUVuK0tkUFRUTlc0OFdGNTBub1dKY2dGOTUxMi8vblk5UU pONTNJbExlekpKVUI3Y3Z3WUhob0NTcGNEbVkwdVIrSEEvMHdQTFJ4QkFrcVY1MGVKamtmazEvclg2LzF3dzhZeHdnYk dhSjNqVlZQN0lodDQ5d2JtK0VYblIvOE9SK0FtSGxMS2lOTjJJemlpQUxrL2VhTTBVbnRMRG96YkVZejFGZWROTDNtak h aSWJPbzZmL2FZRnFHY2ptczMrUytDZy8wSWE3L1dURmJJWDkwdjRuSU9VSWd2NFRwNlFJamFESTRNSlhIeXpsTmYvVG44 c0I2RDJrTFpEK0VpWUl uRWlXelNPN0tQU0lrUHpONlVzTExFOHd2ZkQ1Z1l3NGRQOW5ldVBiMlM5REpMa3UrWUZ1YmlTRklEa2R4OEVSWHpHL0Qvan R3VGh4ZVhBOTlKSGVQVndnczNTL3dXZ2paWTFRT2JyZjNUaHhQYkJwL01vM0xuVFphVE54aVlJb1FpYXoyci9NbVNCL2VH TXdhc2pSUFB3QW9sN3Z4dDl1UFBBak9obk9sSDVWSzZiYTc5b09MWElESUd4ZmlaUStWRGFnYS83RzBpaDFLRGgwQjRl YU1WVWdwY0g2eGhKMkpHc3VkSGJleXloZlBvVXd3OVZxUGt2NmNTVXF6TjErQ25IMHYrRCssYVhBbG5qZVRmYmhlTTsw WVhRamxodGJIUUJ 0NF R5NUlBWkg5YTVDSXZpQ2JpbFVUYjFobFF4dkJuVCtRSmFjeS9aWkJGM2hZWlQ1TmtqNDA0TzdLbTZLVkJGbVdRa01H O FJsS05lSDdUVzBpVVVkSmg0bER3RFFNQWpUMmFNMkFLUllIRUJkTGhFTndjVXg yVjcxYWQrWFh4MG1IaWpXQThwUFB OcDh0RHBiV1VNWlU0aURrMkpTanZRaDdKL0JvQk9DR05PUG9rT3gxNTRoc3YxZjJxQlV3NWpYeUpYQzhDMVlKNlo rM0VPZ0VVTGExc2k1RldSL1hhZUc2SWdvb3BiSzI5T01UMGQvbUVweklld05 0TGZGRnAz" 
+                                   download="France Ultra.npvt" class="btn btn-download">
+                                    دانلود کانفیگ
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Germany High-Speed</td>
+                            <td style="color:var(--accent-primary);">جدید</td>
+                            <td style="color:#ffd700;">~42 ms</td>
+                            <td>
+                                <a href="data:text/plain;charset=utf-8;base64,aE9PQUtKTUVsS0JhdzlZeXZGZWZBdz0saVJmOUxJa3Y1eEVUeGFMZGc0dWluWlo5bkd3L3U3T2JTUEY5eTNlK0ZaRS9vV2F6aG1VT0JxcDBldVdPUldyeVFOODRJcTVKVUNDQ1RFWFBqSXJ2U3RkaXpHY3RwZlNGVU9MQVY0QkYrZ1VxTUlzc2IrVGx5RXJuaGxDTXRPOWZlWGJiSUdUMGdNVWd rbzVCZ29PN0dmSm54MUlzdWJC eUh yYXF XZFdxcmtTeFlOZGxDTE9rR1J1OFgwR1V6dUVKNFduUVpEZXhndjhDdGxsWm04M3ZXTUJreldFc3Y2WmlHN3hx S3NxUjl3bkVLcHhqb3JLemNDYTZWQWFNakx3Y2NUMytJTld2azV1OUg1YkpQaktDb1JxWjAxWEY4N1BUNzJnb1R1eFRW YXZOVTNnM2E5QTV4Ly9UemZjUjNmeFN0V2ZZaGhma21TUVRlOFh0QjNhKytYWF IwbkRoODUrWU9YT0xNVForSitBVmh OSTBnY3ZTbDR3Q2xqaEgrcWI5ZkZUeWNPbXJpNWE1ZThmVUMzU0s2UklkaW5EaDh zTzRFRk9VbEFaOVEvMGt9TU pNMlo3UHZTRXF4VUFhREJ2c2VtbUtQTjIvZ3N1bEM4Vk5CdzBxNVEzSmluRGg4dUxtcUYvSHNRY0FodVZ3cGROVWdaUF NoTDFEL25BdkJWcmtKeUNUWmVtYWtvWG9Vc1pibmFpdV RycG9qVEZ zcitITEM3WG lGY3loOUVRTk k1dkxLKytj d2ZpUndtZnBLZEN4M1BsY0hDc3ZLd1g1Z1lI eTJMakxjTnluQzU4cHJk bkd2RW5RWUdBcUU rQU5JczBidlQ2K3dHMjl4YmNaTGxTRUR5Y2RqS2w5SFpRb0ljS2pD b nZUUFUr ekhWbXNLekNTdUJQQW1zVG94akxOTWMxSzYr d3dRU3hHbHJC SGY4YitYVEhjQ2FqNTlBWTRnSU p4MVc0WG9zb3hHZzZzK1A1RnJZaVRjQnB1UW43Sk45dUx yajBRMUNs bkJmZUtQd0ZZeVNT SURpL3VDTVhvWHdSeDY2NUNZNGs zV29zdWJ0T1VQL2tDc0JPcUVnOGROc2daTEMzekFHMkt rSFlxTDlLN UV6TmJURDA3TEFKanpzUnk4V3NXZWh 0NGJC a2l2UWIyZ3BndXhUV2F2UHQzZzNhOU E1eGEvVHp6OFIzTEJTdFRQWW hma21TVUxla jVkUDhtS2hSQVZ hbkRnbGl2VG5IYnNOdGd5b1hkSE9PSWdLYmVrN0J1OXdEK01NdUYzalEvUVlER2p1RU1CaitWWjlkR1JDZVJuMlY1ODdJcG pBYnlEQ042MTd3Y1FKT TV0TEtLS1lF amkrMXVlMmVG M25iTXNRNXRSb2VqeU5aOGxxK1JOeHR6VjU4K29yOUFiYWhGO2RZeWx oWEpJUjVBdlMzUndhN1lVR2VjKz lGMTJmTGRqYUs5SFl1OGIwSDNzdnZFVHAweTJkeWl2Ui9BYllnTDh2a3FFY1VKSVF 3SS9xS1BBRzkvZ1hJMH FOTUJDU0VlUUwwczZNVHN TWUd5cUh2RVo5MHkyZHlpdlJ4RjZDT2xOaDh2MW1lWXR0ZWZPeU5sMUN 7QXhmZVFPOEhSaVRLYmk ySz9CWmVqNTBSd1dpNVRoWm8wbnNDT3dFL0U3OWJ0Tlh rQWRTSk5GM0tyUzUveHkzcVQ rTW hwWlFjeVRLWXptSzlHSXU4Zj hSd1VDMGQwSXE0aUF1cExsdUhiREdEL0lWOTNjWGNOTm5MYVdLdDE2UEV4RExUcmxDWm1ITlhue nNyVk5QcFVBRzF1ZVJD WnRk eFY1OHQ3SUFBTFoyRVBKYzkzY0xONDQyY09maENrUGx6MDJmUy81MzFDcmlJQzY1cE9ZdThWNWJtcXIrQjZFa3kzRTdwS1cxVU9tZUdQ TG9wRSt2SklSZWZMRHVUQlRs aHdHZm52OUpae kNUMm1lejcvSktzWlFHZzFIN0hwbGlqemR2NExKb lFvOTRU L0tUb1U1Rlk5SmVmT3p1K1N4REFzTjdMU mJzbS9SYkFMMDdEVlF2UWdOeS9ydlZpcDc0Mzl5aXZTM0JxcUh yQXNO SHFGOUxiOUJsTFlyMDRnbVAyZzNMajdwRW5XM2lJR1NLOUZ3Qmo wOVA4bVMrVHBKeno r c3FyNG9FU0kvUEY4SVRrUWxtV3B4MUxZV3phZ2E2TmdUZDZPOFI4M HFjY2or aXZwWlE2WlpCZ1krb1R5VTBpek51aXZSWkx2SHlCcyt hcUZrZFdwdzRKWXIwT3gyZzBEL01tSkVKSEg2R2NDbnVzTkJG NjlNTnpVV3JSWFkxaEh0cG82OWtBYVZ nVnBlNTlSblphOHg3TEs2ajVoRzV IbHJF TkxoaUNIU1FlRFN5c3p kY3R0LzVXZ0dTb1g3QWt3Mzl5aXZSckhxQ3dCdHFMcEVXS2RlSWdaSzJLWGgvTWd6Wmk2TllOR1hMY3VLOU1NVXNvOEl5 L2lSQ2JOanpIUTdwSmdXSDdic lFaUzY3MHlzUHN4MVpyQ3N4VXJnelFETHBxTVlva jRITlROU3V2c0s4RXNTNWF3Y2YvRzZkMHgzQW1vK2V4R09KVkNjZkp1RjZKS01Sb09yUGpkeGEyQVU zQXRMbDNQQ3JpSUQrNnB1a3U4V1E0OG11bFgxUjJrVE53NTRvMkwvKzNRY2dNbzB3bGRN NXdON2lpQTFEcHZrSE5MTDlFLzJQaUlIS0s5SUlhdk1rL2pHZXJz c2QxMjM4aitxcWFINlo0UDR3dG5jbFk5QmpQTHF6YXk3eFR3WFBrTDVPZDFxY1lURzR0UVlBb1Q0TnpiV1JDZERi an k3QjlLNzdGcU4ydmND ejAx a0FrOUJoNUlyMFdFci9QZERXRHNKYno0VFJldVNEa3ZwRzUyNk9qRn o2Q1d6VXczK3hyWXBxQnJLOGpv eklvWW9Y aTN5cWp1K2drem44eG4vcUtLeFY2UGdLTENtOUpFalpuU1hyL3Npb1lVb1hpM3lxSExkOFBhNG1ERHVzNkt4Rz czWG9mS0NuRkJNMU5wdDhMZ S9zQ0ducj dQ YXBNRlNPdFNFWHIrRHBhMDdnK0R3MDlmNkNmR0R4bDYvN0swNVVMWkRzOHo0dzA4UjFJUmsvTHFsUjE2UFY3SEJMc1ZlMElUYmJQNnZpa2xJNjdDT2pPL1RUNFMxMFd6K282UTRGNzMzcS9LWm5CTUNxcH g2NkxLbVNnQzhwYXY3Q2ZZZnU4WG lLZUo5TnhRcmsrMVZLRVgyQ1I0aUNuaXZST0hyeGt1Zk xwaW55aHN4dDZibTF5eDZQaWVqeXNNUhDQ0pYVmF2SzZzOEJR LzhEdzNWelNYNmVZ MlhIQjlPeWNMdkhBdDk xQXlVVTNrK0lncDYyS1p3YXF6TGZ5aHB4M2VKN0tkdTJLK0NzUC8zL3d3ODNlZDliTXhWN i9zN2pxRUw5MHR2SkhuRTN5bXMxbnN ZcjBsQjI5RXFmY1lzTkZUb y9pS0Z1K25RUTNtMjN1SEpSVzZEekhENHVMVUlMdk g4Nm9KV2hGTWFrczV TNzdt dXVpZVg4K2Fhd2ZvSndLcXFYcisrcjZoZWo2ZTJ3TVA2Q1ZLTjRpRHVzNlJ0RjZHcGpveTcveGRVeDVBenMrZjQ0eTd4Y i83eX U4NUVyWUxOVH Ivc3JTeFF0d2kv ejEzSUVRcVowV094czdlZkc2QTNzY0RraEJHVTFObHQ4ckc2NnhPamNxR0F0OGxHaE5TU1hyK3l1R2Rjc2hlN3lqTFZCWXVaMDE2Lz dJMlhVT0hrNF lDUmlCNjR3K0lnc1lyME5rRGc3dVNBbklnZGNOVFNYcisvazRuVkM2UnZnbml5Y0JpcU5pQ3hDckI5T1NWUXVNOH pYeDZs aEVjbDl4anArem53RkNPU G9qNk1aTWhPU1puUVo3TzV1Qzl jdk8rMzhwYWNjT2ZVanl5cysrT2VxUTQ4ait2S0psd1h0Mkk0c3JJcjBV aTd4Rk9TZVQ1d2Z4OGFPT2toN XJSSTZhdmpuMzc2Q1RtcW5EQ3I1dUJ2UnVRLzRwU3JrUnVh eklxemVibmFsQ09oWTZNNDhsZk1vYkxZTVgwN0Q4dThVdjhuNENJR3BMWUp6REI5UHF6VU9KVzRvQTJsUVhSeFpBM3Jvcj BWMTZQMmJiQXZ ZaE1jSm5aYnZpSzlNd3BqOVhxZ0ErSUUzdk80aUN4aXZRek9Pc1M1b0F1K2drU3Fwd3dyZWJudlVicldlS1VycDRkUk15R U9xWHU3bDFRLzF6d25FdVdn b2JDaGpTdDdPSmZST3BiNkp hZGtoL0gxT01 1d2ZTeXhRS Dl aS9QdzU4RnU1UEtYci9zak45UTZuWHJnSStJRWpiVWtsNi81K0tLWFPSSz c0SUJYbHhr aXg0OHd3ZlQ2c1ZE aGQrQ2VpTUJPUmN6WVo4SDArclpRNFVmZ25pZkFUcTNNaDE2L2kvcDVVTEEzdjhPOX lBV2JtY29zK2JpbFRndX lNYmJM cVl oRnA0TGlJS2VOSXVC RjVKZlFsUTJlQlJxcW5DN0I5T0czWE9zYy9KY2wzZnoydUlncjdmNlVqbHR1cVV oTUJPT0pLRU12dXdpbVZlak9IZ3o0N lVFZFdVVGppdDdPY0FTTFUzdDhvL2xrMGtxcHhmNEt2NnZsQ2hqYWZhV3NoTWU5U0VlY0gwc2pBZnNzKzgvUjdVU21lVDJY dkI5T3dVVUpxam04aG95VVVtbDhwaDlZcjBvQzd4VTZmQ1BOVjNCTXpsZWNIM G9yY0N0cGJ3bEEyRVRZbVQwbWJCOVByc1VMckFqb3lwL1hmeDVBenMrZjR4Uzd4VWY3eU5NbGVmWlRSZC9PeWdyOFZqMlBv OGpuV1kyT3gxNi8rb3BJQXJ6RXB2SkNuSGNldzQxZXY2djY4Uzd4L0t2Z S9Qb0pvcXFjWlBTenVuMHU4V0tPakxEV2Q0SE01VjYvNU9STlhPYjk1NERVK2drVzJ1SWc4cU9pb0IybUQ3YjZkTUYzRTh6 aUlQbS9wSk1ScDF2d2doR0VXN jZFeWw2Lz dJcCtsQUk4TlAwMjFhczJweHkrS1NsYlFHbnhLSEJnNFFSdFpmU2NmaXIrbUV2RDY1N1pMSVRhS1JuRGptOUtEY0FLQ0V2Y 29uQnB2MU5keDBibTFLQmUzU2VqYVp0Tk81ZFRPWStsbG9Vc0F0OXZvak1LS0NTNlk wbnZR dWJSTEh yWmd0OXJYeVZsSzFJUmsvTHFsUWw3eENiN0JqczE1REpuS1ovbVh1S0k0c3JhK3pBckpRR0NZTkRqcHBLUE5Ydkgwdk1KR TZVMENuOTFyL0xxRkNSMmh6NkdNQ3NCazhYYkxyK3pybV Vib1lDV3owYkRDUkR VbkM2L3NyTk9HN0FmbThwb2hCRWIxSklnOExPbDN4TzBnZkNVT0lRSFU1WExjZW01dTBVWG9mbTMzRXJEV1BhWDJXZS8 3UFNKRDY3eCx2TjY3Wlox cERVUktxK2U0dUhIU VY0emw1UmJZUzM2azR2NU5qQjQrV VF4SXFQQVl6MXcxWF9pdVFkZ2VSa2dlNExUa0hOaGNOYzJ1L2wyZl hYNUJqT284UnJHWFZuNStLdDl6MWtwQWhsV3ErQVd oaDE0T08vN3U5ZFBrd2F5Y i9GK0JaZmt2dXJ xV1g4UWF SVDIxNWhhR0d uak80S1YyMV R6V3hiM3E4QUh4VXB5L0s3bW85eGVNRjFUU mFMckE4Tkt iZzd0cU9zZkNKWWFVejZqOWdY RFczSXQ2SzlZaHhDUUZGMzJvdU FBeTE5eWliYitONkVR eEUwTTQ2aitJTTlLWVV EK2tUM09RYk5mR25uOXNWSFg=" 
+                                   download="Germany High-Speed.npvt" class="btn btn-download">
+                                    دانلود کانفیگ
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Azerbaijan Premium</td>
+                            <td style="color:#ffd700;">اختصاصی</td>
+                            <td style="color:#00ff9d;">~35 ms</td>
+                            <td>
+                                <a href="data:text/plain;charset=utf-8;base64,NzB5RVpQOVA0c3ZzZnFCcTRoYjhSSjA9LEY1R1ZSMnhHMFZCVlBrdnhsbC9oTThy bTl zSW5FN0QrV1VFN2VYSW5PZGRtUlh4MDRhVlpvYys3VDNoV0oxTlpLdE5LWjdURFl tNjZ6V U84SkFWV2todFN5djVYUG1vQWdlKzA3WFArZjE3ditLYWFFYmtERkZYR1kvaGxiL2xKYW5uam1wY29VTVRCdG1iOHVtNGpVWEU5b0JrQ09jWE FocGswNzhDNDdNQ3YrN1haQjI2SkFVSzV2ZTF4dm0yel9QMmxuSlM5NHdNRFFMSXQxZnp yMkMvN3BscVhLYmRBUkQ0MDdsTi9yWS84NTNJWkVUM3BFOUJpc1cwbys2TG0vQ3hqbnhQN G5SYVZTYVU1UEM5NS82aytJNDBG N2lMRVFpa2crcFVxZ2VZV1IwOTZaOXBjUzRvSGw4TEMwR0liME5LcDd aRE1HN3puSU9DUkJTY05SdFN5dmdqa29NM0VFOWc2TUErS25YNy9hV1pFam o1bHRCcFBrWUtUdUNxajJnR05zS29WQm9yeHY0bi8rUkMvNEpoMVhQa0V3SUowcWQwK0x2OXAvYVl jMHpnQ1ZGVkFZeTB uTG04SmFteW1uUlR0emNGVWdQS DVQVy91ZFd0NFpwL1NyZldUMEZVeEtUZTVidTJwL2JDS1JDd2tVOUJWY1NrVytXdHM3L3VqakVOWXpoQkN4VFNwSDZ3L1hqa3J0OHpIN2RiV2dZMDBMVCorN3RhOUx6RmN4cXRnbH BWZHN hODE2bX A5YVhuenl3UnZ3OE9VcmJIdmxIc3Q0K2tvYzhwRExHWVRScW14Ylh4L3B Mc3NxUHJDSXd yM2pFRVRaOVc0dUxEOXRxS3h5SHRjK1hBUUJ nL1VvdXor cG5tbjl0Z3FEZmRmZFFRbDEw cld2LzYyOHYrN0tKeEt tR1U5QkdaT2lLL09Wb2ZL NmpueGNybXBCRWJqTXNibmhyRkMvN3ZCa1hnMVB1OU9aRUF nYVVuamxFUHdBbnRrTUFVTzY2WGw zUXc4SHhFVjdkYzZtZXJ5VC9Cc0hJS1lOWUg2LytQQmtFcnJuUDBFZTIwekE1ckJmOGJIYU l4S0p3RmtfaE5heFJPUzJRcElqanRTaVRnS0RiL09wU1B1ckx5Lzd2YzlJdmZFQWdUc2crcnBxS3pwL3IvZkds ejVMVUVUQXRPa2lxa2xJNjNz bk g1U2lYY1RFWjNWOHRUbHM2Ky92QmtEYm9hQ0JEcmd6dnFLeXR6YURGS0JtbTB rRl pZUDN5dGYrcmM4SDJsaHBjdTUwQ0ZzYkpqTHFtZzBmb3NOd2FYTy8yRVJiQ2pZeHQvNnd6NzVqSk1CdTVXRUZLK052ODlx aXNDdlN5eWk4UXNpRkJXd0g5OGxYa3ZySHhzY2dhWE84MVdS WTRqWXp mN3Jv bjZa dmFJd3luc1FjR0s0UHFETmI5b2VtZzNCcGMrWGhCRjVYU2pNTFg4eE8vcHNNekNyRC9EUS9NL2ZMRzdMNnk3ckhST3lQNUxFRU1FdFd5VysveFErNklq bndscmdOQkY4ZkdqRWl3ZzE3dHBzTStCNGxwVHp6RTBhSVovckJsOHJqd1pFU0pNUlVQenR LalpXYWp6c0wrbn lUSUt2SEVFRUwrRDZvVFcvZFR6c2RReUl2ZFJPQmpBZzdIejdxM2M3cXdaRVNKQVZWVkY1bmg0cmpyUnJQbG1YTWk5em8vUWYvT29uUFcvY1NwNEo5cUl2Zk5FQVlvMG95aH NJUzd3ZmZGSWxMM1RUNDlCZzVUaTArbnRkSzM1eUNCTnRzOVhCZFNUL1ZHeXVYeXdzcGdnUz dNUlUxWkRtT1FpMXYxcndmYkFJd2l3dFQ5QnU1bjhqcWk2S1A2bTFUWUt2RE1OUDV5YmpB ZmtzSmo0aU k0N0k2alBIazg0ZzZQcytMcUU4SWZKTWd xOFNB UVQrWV BxZ2RiOTMv aWcy eWtNdnBKQldkZURweXJX L2FQQjl0OGpIYUR5Q2hkRi9mSTAxdjBFOGFmd1pGS0p0eFFRNWNzay91T3hvKzZJam53RmlYUVRB aDNKakNHd2cxYXk2OGtpUTRrak16OH l5Y lVhN3Jxa zdvb0lPRldKZWlzTWQ5V01 4T ENERFN0M WpVTHREb1VXdXF Tb1Z5L3FwMnF2Y1F2UzdHdkRs b2h6cmRnNUt5ejcrK3l mSlJTNkRRM E84UzJ5T201ZCsr dDJTVVJwNUlTVFkzTHRGSy84U2Y0NFlJb0c2RWZRUjRXall3Mi9yTnJ6ckhZTWhlN0VoQS91SnVyb3FxaSsqL0c3Mnd8UXBsOEFGaURFakNld3VlM3hwOGxxSXZmeUJIRjV4S0xZNjdMMXdmYVdHbHlzT0JrUWxjQ3lucjZZdXl3bVRNYTRwQUxDdGJGcUxtejZWVjZ1T UkxQ2tmSlVBQSt6cnBpNSs2UCt 3ck1BYW50eFlBV3RPMG9hU2xoL21 4bVdnYXNFbE5EVHZWal9DbWc5WHV2TU14SXZmeEJRSWIwclZoOS9PeX Z uWk1pTDNuaGc vUDhTK3IraXp2L21Jam53WXRGUUJC aW45OHFMbHNiUG9wdDRqRUx iZFAwR1JqT0crMXYxQjZMRGNCUkdHen hZUmxzUytlZk9ELzZm c0JwY3JR c0hFM2JUdndIemlnak40SmgxSXZkNFAwR1h nNjJjcHFTa3Y2RE5JU0wzaUQ5QlM4aWlRT21yZkwvNDhHUU9wM3NYREpqT3ZEbW81Zmkvc3Q0akc3RWxEaityakp5Witicyt0NmpHWjdFejcvRGkr cGFUdVhh eU lqaHRT aVVFTEROZlZvMHFvNVNmQjlzZ3BFN1RiRFZsd3pyL081cm9lN2IzZmFCMjd0a0ZaTFlPM2N1VzR2ZmkxM0M4Tis3Z01Eb2lEL09Lb3V3anUrczBxRjdHbUVFM2Z6cjJu cU9VNndmY WVkRTc3UWsxV3hwU01HcWFE dGEvbW4yaUkreE5OVlFTRC9JN m83YWF0NUpaMVRPWEJXVm0vZkp4MXYyMnFlU2NmRTNua1ZOWlVzQ3lvN0Rse kgyOFdvaTk0WU5CbEhPdmk2a3NEUDQr c01vRzRsbFdUaXZnK0dRdS9HTXMrWHdaRktKKzFKTnBJL0c3dURYN0dJam5STTVUUlpWNnlSNERDKzZGdXQ3cFpUVytTK1AwRU4vZkp ydk84c3ArQ2Jkazd2ZjFSVG o1dnFMTHJ2N2NIMj hXb2k5OW9NRjcvUnBmYldvY3JHaUk1M1VPUzJUVktvajFGOTF2MEF3ZmFkZEU3N2NGQk5IWkYrS2JtRElNRD Q4R1Fh dS9CTkJGTG90eWZ2Z3g2bmo vQmtSdnV5VFZ1bW1ZeTdwb000cGZxVWFScjdCajlCZSt3eW Nicy92cUtJeHgzVk1GMVBzWXl0NDV5KzNpa0xvYjR0Qk hPRDZpYldkL3l1YzB2RUlid0VR SjF4TGZTMXYwNndmYmxGamV6dVF3Tm1zQ2t3dUtEZTdHSWpqUUx1VHdRUG 3iaTFIVy9SemtwTWthWE85SFFRV3p4THpsMXYxTXdmYk5pTDNJR2kvaTVC K0JxVHVONnlJa mhUU2llZ01Gdi9Ed3dEZ3UvTDhzL0JrUklreEV4Rnk yYW5qcVBNVX Y2VE5BYUpQRmt0WlRqNTZpaVJ1YUlqakhIcGRZ L1FYR Dk4Z0RqdXFENWlJNXF1Rm9Fel9RbTRzaE9PM1pydnFaYUV2N0lEOUJwNDJNTysrR2lKRU1qQ Xh zRm9IUHQ0dU5qS0pBaXhYc05 0WkdiWFphUDB0b2Z6OXBaM1V2ZWlFQysrd3J2Qjd2MnY2YWJaWTFMM3JR SVFt dGEvZWU3OTk3LzJnR1FSdTlVYUx zckR1VmJ2a1JQcG84TTBGZmZvQlFKZTByVzFxTD A1OHJmSEZCRzZmd1lIZ mMwdU91Mlo vK21 3eW91eEJZRjAvVXRRT29zRmp4cmVNZ0dMeG9DZ0pJOHFUeStMcFF2KzdLSnhLbURFOUJ iOW1nelBpbSt2eWd5V1JFOTJGUEFhUEVwaTNwdWw3NXA0NThYUGRjUVU1djBxTmw3Ym9ocC9hT2FseTJQQkFYdzh5RDgvaXAxdStaeVRVTnROZ0dRY3FEO GduM2dnPT0=" 
+                                   download="Azerbaijan Premium.npvt" class="btn btn-download">
+                                    دانلود کانفیگ
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align:center; margin-top:50px;">
+                <a href="https://t.me/Leviko_pubg_bot" target="_blank">
+                    <button class="btn btn-pink">خرید کانفیگ اختصاصی</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- بقیه بخش‌ها بدون تغییر -->
+
+        <!-- آموزش و سوالات متداول -->
+        <div class="card">
+            <h2>آموزش و سوالات متداول</h2>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">آموزش وارد کردن کانفیگ در NPV Tunnel</div>
+                <div class="accordion-content">
+                    <p><strong>گام ۱:</strong> اپ NPV Tunnel را باز کنید.</p>
+                    <p><strong>گام ۲:</strong> روی علامت + (افزودن) در پایین صفحه بزنید.</p>
+                    <p><strong>گام ۳:</strong> گزینه Import config from clipboard یا from file را انتخاب کنید.</p>
+                    <p><strong>گام ۴:</strong> کانفیگ کپی‌شده را Paste کنید یا فایل را انتخاب نمایید.</p>
+                    <p><strong>گام ۵:</strong> کانفیگ اضافه شد → آن را انتخاب کنید و دکمه اتصال را بزنید.</p>
+                    <p style="color:#ffcc00; margin-top:15px;">نکته: اگر اتصال برقرار نشد، SNI را چک کنید یا کانفیگ جدید بگیرید.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">سوالات متداول</div>
+                <div class="accordion-content">
+                    <p><strong>۱. NPV Tunnel چیست؟</strong><br>بهترین کلاینت اندروید برای اتصال امن و سریع</p>
+                    <p><strong>۲. چرا گاهی قطع می‌شه؟</strong><br>سرور شلوغ شده یا SNI نیاز به تعویض دارد – کانفیگ جدید بگیرید.</p>
+                    <p><strong>۳. کانفیگ اختصاصی چطور تهیه کنم؟</strong><br>دکمه «خرید کانفیگ اختصاصی» را بزنید.</p>
+                    <p><strong>۴. پشتیبانی چطوره؟</strong><br>۲۴ ساعته – دکمه آبی پایین صفحه راست</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">نکات مهم</div>
+                <div class="accordion-content">
+                    <p>• همیشه آخرین نسخه اپ را استفاده کنید</p>
+                    <p>• کانفیگ‌های رایگان را مرتب عوض کنید</p>
+                    <p>• از Kill Switch در تنظیمات اپ فعال کنید</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- دانلود اپ -->
+        <div class="card" style="text-align:center;">
+            <h2>دانلود NPV Tunnel</h2>
+            <div style="margin:40px 0;">
+                <a href="https://apps.apple.com/app/npv-tunnel/id1629465476" target="_blank"><button class="btn">اپ استور (iOS)</button></a>
+                <a href="https://play.google.com/store/apps/details?id=com.napsternetlabs.napsternetv" target="_blank"><button class="btn" style="background:linear-gradient(45deg, var(--accent-third), #00cc88);">گوگل پلی (Android)</button></a>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="https://t.me/Leviko_pubg" target="_blank" class="fab-support">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="120" r="120" fill="white"/>
+            <path d="M98 175c-3.89 0-3.26-1.46-4.61-5.15L82 132.2l136-83.3" fill="#0088cc"/>
+            <path d="M98 175c3 0 4.31-1.44 6-3.5l16-15.5-19.5-11.7" fill="#c8daea"/>
+            <path d="M100.5 145l82.5 60.5c9.4 5.2 16.2 2.5 18.5-8.7l33.5-158c6.3-25.3-9.6-36.7-27.5-29.2l-198 76.3c-26 10.4-25.8 24.9-4.7 31.3l50 15.6 116-73c5.5-3.3 10.5-1.5 6.4 2.2" fill="#ffffff"/>
+        </svg>
+    </a>
+
+    <footer>
+        <p>© ۱۴۰۴ – پنل کانفیگ NPV Tunnel | همه حقوق محفوظ است</p>
+    </footer>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+            const btn = document.querySelector('.mode-switch');
+            btn.textContent = document.body.classList.contains('light-mode') ? 'حالت تاریک' : 'حالت روشن';
+        }
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
