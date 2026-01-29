@@ -152,9 +152,9 @@
             box-shadow: 0 6px 18px rgba(255,0,170,0.45);
         }
 
-        .btn-download {
-            background: linear-gradient(45deg, #28a745, #34d058);
-            box-shadow: 0 4px 12px rgba(40,167,69,0.4);
+        .btn-copy {
+            background: linear-gradient(45deg, #007bff, #00c3ff);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.4);
             padding: 9px 24px;
             border-radius: 50px;
             font-size: 0.95em;
@@ -167,9 +167,13 @@
             border: none;
         }
 
-        .btn-download:hover {
+        .btn-copy:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(40,167,69,0.6);
+            box-shadow: 0 12px 30px rgba(0,123,255,0.6);
+        }
+
+        .btn-copy.copied {
+            background: linear-gradient(45deg, #28a745, #34d058) !important;
         }
 
         .fab-support {
@@ -314,7 +318,7 @@
             .fab-support svg { width: 38px; height: 38px; }
             .table-wrapper { max-width: 100%; }
             th, td { padding: 7px 10px; font-size: 0.92em; }
-            .btn-download { padding: 8px 20px; font-size: 0.9em; min-width: 120px; }
+            .btn-copy { padding: 8px 20px; font-size: 0.9em; min-width: 120px; }
         }
     </style>
 </head>
@@ -343,43 +347,45 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>France Ultra</td>
-                            <td style="color:#00ff9d;">فعال</td>
-                            <td style="color:#00ff9d;">~28 ms</td>
+                            <td>آلمان 1 🇩🇪 - Germany fast</td>
+                            <td style="color:var(--accent-primary);">فعال</td>
+                            <td style="color:#ffd700;">~40 ms</td>
                             <td>
-                                <button class="btn btn-download" 
-                                        data-filename="France Ultra.npvt"
-                                        data-config="NPVT1
-JcKG7Khgx2lvCIdQrJ1BKu4=,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">
-                                    دانلود کانفیگ
+                                <button class="btn btn-copy" data-config='{"remarks":"آلمان 1 🇩🇪 - Germany fast","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"104.17.165.123","port":8443,"users":[{"id":"f85f60b1-2b96-49e9-8bde-b656d1516df0","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"ws","security":"tls","wsSettings":{"path":"/?ed=2560","headers":{"Host":"gx8rw8fz783ncefn332y7uyfsvb59o820mryrxu1cj19jiuuur.zjde5.de5.net"}},"tlsSettings":{"allowInsecure":false,"serverName":"gx8rw8fz783ncefn332y7uyfsvb59o820mryrxu1cj19jiuuur.zjde5.de5.net","alpn":["http/1.1"],"fingerprint":"chrome","show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Germany High-Speed</td>
+                            <td>آلمان 2 🇩🇪 - Germany fast 2</td>
                             <td style="color:var(--accent-primary);">جدید</td>
                             <td style="color:#ffd700;">~42 ms</td>
                             <td>
-                                <button class="btn btn-download" 
-                                        data-filename="Germany High-Speed.npvt"
-                                        data-config="NPVT1
-hHOAKJMElKBaw9YyxvFefAw=,iRf9LIkv5xETxaLdg4uinZZ9nGw/u7ObSPF9y3e+FZE/oWazhmUOBqp0euWORWryQN84Iq5JUcCCTEXPjIrvStdizGctpfSFUOLAV4BF+gUqMIssb+TlyErnhlCMtO9feXbbIGT0gMUgko5BgoO7GfJnx1IsubByHraqWdWqrkSxYNdlCLOkGRu8X0GUzuEJ4WnQZDexgv8CtllZm83vWMBkzWEsv6ZiG7xqKsqR9wnEKpxjOrKzkCa6VAaMjPwccT+INWvk5u9H5bJPjKCoRqZ01XF87PT92goTuxTVavNU3g3a9A5x//TzfcR3fxStWfYhhfkmSQTe8XtB3a+/XXR0nDh85+YOXOLMTZ+J+AVhNI0gcvSl4wCljhH+qb9fFTycOmri5a5e8fUC3SK6RIdinDh8sO4EFOUlAZ9Q/0k9MJM2Z7PvSEqxUAaDBvsemmKPN2/gsulC8VNBw0q5Q3JinDh8uLmqF/HsQcAhuVwpdNUgZPShL1D/nAvBVrkJyCTZemakoXoUqSZbnaiuTrpojTFsr+HLC7XiFcyh9EQONI5vLK+kcwfiRwmfpKdCx3PLcHCsvKwX5gYHy2LjRcNynC58prdnGvEnQYGAqE+ANIs0bvT6+wG29xbcZLlSEDycdjKl9HZQoIcKjCnvTPU+zHVmsKzCSuBPAMsToxjLNMc1K6+wwQSxGlrBHf8b+XTHcCaj59AY4gIJx1W4XosoxGg6s+P5FrYiTcBpuQn7JN9uLrj0Q1C7nBfeKPwFYySSIDi/uCMXoXwRx665CY4k3WosubtOUP/kCsBOqEg8dNsgZLC3zAG2KkHYqL9K5EzNbTD07LAJjzsRy8WsWeh14iBkivQb2gpguxTWavPt3g3a9A5xa/Tzz8R3LBStTPYhhfkmSULej5dP8mKhRAVanDglivTnHbSnBtg5oXdHPOIgKbek7Bu9wD+MMuF3j2/QYDGjuEMBj+VZ9dGRCeRn2V587IpjAbyDCN217wcQJM5tLKKKYEji+1ue2eF3CnbMbSq5tRoejyNZ8lq+RNxtzV58+or9AbahF8dYqlhXJIR5AvS3Rwa7YUGUc+9F12fLdjaK9HYu8b0H3svvETp0y2dyivR/AbYgL8vkqEcUJIQ6I/qKPAG9/gXI0qNMBCSEeQL0s6MTsSYGyqHvEZ90y2dyivRxF6COLNh8v1meYttefOyNl1C7AxfeQO8HRiTKbi2K9BZej50RwWi5ThZo0nsC9Ow/E79eBtNXkAdSJNF3KrS5/xy3qT+MhpZQcyTKYzmK9GIu8f8RwUC0d0Iq4iAupLluHbDGD/IV93cXcNJnLaWKt16PExDLTrlCZmHNXnzsrVNQpUAG1ueRCZtdxV58t7IAALZ2EPJc93cLN442cOfhCkPlz02fS/531CriIC65pOYu8V5bmqr+B6Eky3E7pKW1UOmeGPLopE+vJIRefLDuTBTlhwGfnv9JZzCTNmez7/JKsZQGg1H7Hplijzdv4LJnQo94T/KToU5FY9JefOzu+S7xDA3N7LRbsm/RbAL07DVQvQgNy/rvVip7439yivS3BqHrAsNHqF9Lb9BlLYr04gmP2g3Lj7pEnW3iIGSK9FwBj09P8mS+TpJzzGsqr4oESI/PF8ITkQlmWpx1LYWzaga6NgTd6O8R81qccj+ivpZQ6ZZBgY+oTyU0izRuivRZLvHyBs+aqFkdWpw4JYr0Ox2g0D+MmJEJHH6GcCnusNBF69MNzUWrRXY1jHtpo69kAaVgVpe59RnZa8x7LK6j5hG5HlrENLheCHSQeDSyszdct/5WgGSoX7Akw39yivRrHqCwBtqLpEWKdeIgZK2KXhO/MgzZi6NYNGXLcDuK9MMUso8Qy/iRCbNjzHQ7pJgWH7brQZS670ysPsx1ZrCsxUrgzADLpqMYojTHNSuvsK8EsS5awcf/G6d0x3Amo+exGOJVCcfJuF6JKMRoOrPjdxa2AU3AtLl3PCriID+6puku8WQ48mulX1R2kTNw54o2L/+3QcgMo0wldM5wN7iiA1DpvkHNHL9E/2PiIHKK9IIavMk/jGerSsd1238j+oqaH6Z4P4wvtnclY9BjPLqzay7xTwXPkL5Od1qcYTG4tQYAoT4NzbWRCdDbjy7B9K77FqN2vcCz01kAk9Bh5Ir0WEr/PfDWDsJbz4TReuSDkvpG526OjFz6CWzUw3+xrYpqBrK8jozj+gkzn8xn/qKKxV6PgKLcm9JEjZnSXr/sioYUoXi3yqHLd8Pa4iDus6KxG73XofKCnFBM1Npt8Le/sCGnv7PapMFSOtSEXr+Dpa07g+Dw09f6CfGDxl6/7K05ULZDs8z4w08R1IRk/LqlR16PV7HBLsVe0ITbbP6viklI67COjO/TT9S10Wz+o6Q4F733q/KZnBMCqpx66LKmSgC8pav7CfYfu8XiIKeK9NxQrkH+1VKEX2CR4iCnivROHrxkufLpinfyhsxt6bm1yx6PiejysMRHCJXVavK6s8BQ/8Dw3VzSX6eY2XHB9OycLvHAt91AyUU3k+Igp62KZwaqzLfyhpx3eJ7Kdu2K9CsP/3/ww83ed9bMxV6/s7jqEL90tvJHnE3yms1nsYr0lB29EqfcYsNFTo/iIKfu+n9Qq3m23uHJRW6DzHD4uLUILvH86oJWhFMaks5S77muuieX8+aawfoJwKqcXr+rq6hej6e2wMP6CVKN4iDus6RtF6Gpjoy7/XdUx5Azs+f44y7xb/7yu85ErYLNXr/srSxQtwi/z13IEQqZ0WXxs7efG6A3scDkhBGU1Nlt8rG66xOjcqGAt8lGhNSSXr+yuGdcshe7yjLVBYuZ016/7I2XUOHK4YCRiB54w+IgsYr0NkDg7uSAnIgdcNSSXr/k4nVC6RvgniycEbiqnC7B9OSVQuM84Zx6lhEcl9xjp+znwFCOPo6MZMhOSZnQZ7O5uC9cvO+38paccOfUjyys+OeqQ48j/vKJlwXt2I4srIr0Ui7xFOSeT5wfx8aOOKnh5rRI6avjn376CTmqnDCr5uBvRuQ/4pSrkRuazIQzrebnalCOhY6M48lfMobLYMH07D8u8Uv8n4CIGpLYjzDB9PqzUOJW4oA2lQXRxZA3ror0V16P2bbAvYhMcJnZbviK9Mwpj9XqgA+IE3vO4iCxivQzXOsS5oAu+gkSqpwwrebnvUbrWeKUrp4dRMyEOqXu7l1Q/1zwnEuWGobChjSt7OJfROPb6Jadkh/H1OMuwfSyxQH9ZKfPw58Fu5PKXr/sjT9Q6nXrgI+IEjbUkl6/5+KKXOJ74IBXlxkix48wwfT6sVDhd+CeiMBORczYZ8H0+rZQ4UfgnifATq3Mh16/i/p5ULA3v8O9yAWbmcos+bilTguyMbbLqYhFp4LiIKeNiuBF5Jfqlq2eBRqqnC7B9OG3XOsc/Jbcl3fz2uIgr7fm6UjltuqUhMBOOJKEMvuwimVej9Hgz46UEdWUhjit7OcASLU3t8o/lk0kqpxf4Kv6vlChjafaWshMe9SEecH0sjAfss+8/R7USmeT2XvB9OwUUJqjm8hoyUUml8ph9Yr0oC7xU6fCPNV3BMzlecH0orcCtpbwlA2ETYmT0mbB9PrsULrAjoyp/Xfhx5Azs+f4xS7xUf7yNMlefZTRd/Oygr8Vj2Po8jnWWY2Ox16/+opIArzEpvJCnHcew41ev6v68S7x/Kve/PoJoqqcZPSzun0u8WKOjLDWd4HM5V6/5ORNXOb954DV+gkW2uIg8qOioB2mD7b6dMF3E8ziIPm/pJMRp1vwghGEW66Eyl6/7Ip+R+AI8NP021as2pxy+KSlbQGnxKHBg4QRtZfScfir+mMevD657ZLITaKRnDjm9KDcAKCEvcConBpv1Ndx0bm1KBe3SejaZtNO5dTOY+6loUsAt9vojMKKCS6Y0nvQubRLHrZgt9rXyVlK1IRk/LqlQl7xCb7Bjs15DJnKZ/mXuKI4sra+zArJQGCYnDjppKPNXvH0vMJE6U0Cn91r/LqFCR2hz6GMCsBK8oXbLr+zrmUboYCWz0bDCRDUnC6/srNOG7Afm8pohBEb1JIg8LOl3xO0gfCUOIQHU5XLcem5u0UXofm33ErDWPaX2We/7PSJD67x,vN67ZY2pDURKQ+e4uHHQV4zl5RbYS36k4v5NjB4+UQxIqPAYz1w1X/iuQdgeRkge4LTkHNhcNc2u/l2fXX5UBjOo8RrGXVn5+Kt9z1kpAhlWq+AWhhp14OO/7u9dPkwayYb9F+BZfkvurqjWV8QaRT215haGGnjO4KVJ21TzWxb3q8AHxUpy/K7mo9xeMF1TRaLrA8NKbg7tqOSfCJYaUz6j9gXDW3It6K9YhxCQFF32ouAAy19yibb+N5EQxE0M46j+IM9KYUD+kT3OQbNfGnn9sVHX">
-                                    دانلود کانفیگ
+                                <button class="btn btn-copy" data-config='{"remarks":"آلمان 2 🇩🇪 - Germany fast 2","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"104.17.164.123","port":8443,"users":[{"id":"07a21b46-f4a6-47b6-89d1-98375c44262f","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"ws","security":"tls","wsSettings":{"path":"/?ed=2560","headers":{"Host":"1o1qulwpyj16e5ywam0gb7za0957ey3ujj8odofs87th5erf5bqkf9.zjde5.de5.net"}},"tlsSettings":{"allowInsecure":true,"serverName":"1o1qulwpyj16e5ywam0gb7za0957ey3ujj8odofs87th5erf5bqkf9.zjde5.de5.net","alpn":["http/1.1"],"fingerprint":"chrome","show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Azerbaijan Premium</td>
-                            <td style="color:#ffd700;">اختصاصی</td>
+                            <td>آذربایجان 🇦🇿 - Azerbaijan mod</td>
+                            <td style="color:#ffd700;">فعال</td>
                             <td style="color:#00ff9d;">~35 ms</td>
                             <td>
-                                <button class="btn btn-download" 
-                                        data-filename="Azerbaijan Premium.npvt"
-                                        data-config="NPVT1
-70yEZP9P4svsfqBq4hb8RJ0=,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">
-                                    دانلود کانفیگ
+                                <button class="btn btn-copy" data-config='{"remarks":"آذربایجان 🇦🇿 - Azerbaijan mod","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"66.81.247.155","port":443,"users":[{"id":"4525c260-df3c-4f62-b8f1-f4f5f305694b","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"ws","security":"tls","wsSettings":{"path":"/?ed=2560","headers":{"Host":"yyzsuabw9e3qd5ud7ihi5dxm96oglnsvr83cjojnm1efncfhr9ucordq.zjde5.de5.net"}},"tlsSettings":{"allowInsecure":false,"serverName":"yyzsuabw9e3qd5ud7ihi5dxm96oglnsvr83cjojnm1efncfhr9ucordq.zjde5.de5.net","fingerprint":"chrome","show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>بلغارستان 🇧🇬 - Bulgaria safe</td>
+                            <td style="color:var(--accent-primary);">فعال</td>
+                            <td style="color:#00ff9d;">~45 ms</td>
+                            <td>
+                                <button class="btn btn-copy" data-config='{"remarks":"بلغارستان 🇧🇬 - Bulgaria safe","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"172.64.145.38","port":8443,"users":[{"id":"bb8c74a1-abc1-4511-b100-9876e30cb65c","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"ws","security":"tls","wsSettings":{"path":"/?ed=2560","headers":{"Host":"xfjd79v2tjscrm6jqo.zjde5.de5.net"}},"tlsSettings":{"allowInsecure":true,"serverName":"xfjd79v2tjscrm6jqo.zjde5.de5.net","alpn":["http/1.1"],"fingerprint":"chrome","show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
@@ -467,46 +473,30 @@ hHOAKJMElKBaw9YyxvFefAw=,iRf9LIkv5xETxaLdg4uinZZ9nGw/u7ObSPF9y3e+FZE/oWazhmUOBqp
             header.classList.toggle('active');
         }
 
-        // دانلود با پسوند .npvt - نسخه اصلاح‌شده
-        document.querySelectorAll('.btn-download').forEach(btn => {
+        // کپی به کلیپ‌بورد برای کانفیگ‌های vless
+        document.querySelectorAll('.btn-copy').forEach(btn => {
             btn.addEventListener('click', function() {
                 const configText = this.getAttribute('data-config');
-                const fileName   = this.getAttribute('data-filename');
-
-                if (!configText || !fileName) {
-                    alert('اطلاعات کانفیگ پیدا نشد');
+                
+                if (!configText) {
+                    alert('کانفیگ پیدا نشد!');
                     return;
                 }
 
-                // استفاده از octet-stream برای جلوگیری از اضافه شدن .txt توسط مرورگر
-                const blob = new Blob([configText], { type: 'application/octet-stream' });
-
-                const url = URL.createObjectURL(blob);
-
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = fileName;          // ← نام فایل + پسوند npvt
-                a.style.display = 'none';
-                document.body.appendChild(a);
-
-                a.click();
-
-                // پاکسازی
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }, 200);
-
-                // فیدبک کوتاه
-                const originalText = this.textContent;
-                this.textContent = 'دانلود شد ✓';
-                this.style.opacity = '0.7';
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.style.opacity = '1';
-                }, 1800);
+                navigator.clipboard.writeText(configText).then(() => {
+                    const originalText = this.textContent.trim();
+                    this.textContent = 'کپی شد ✓';
+                    this.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    alert('خطا در کپی: ' + err);
+                });
             });
         });
     </script>
 </body>
-                                         </html>
+            </html>
