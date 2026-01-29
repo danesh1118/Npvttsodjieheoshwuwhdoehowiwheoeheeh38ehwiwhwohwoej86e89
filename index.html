@@ -355,6 +355,7 @@ JcKG7Khgx2lvCIdQrJ1BKu4=,QbrtGyLYOAGDmB0yMcwme7RomjJLPrMJp4G1KN/CDdMDtGHaCotl9Cx
                                 </button>
                             </td>
                         </tr>
+
                         <tr>
                             <td>Germany High-Speed</td>
                             <td style="color:var(--accent-primary);">جدید</td>
@@ -368,6 +369,7 @@ hHOAKJMElKBaw9YyxvFefAw=,iRf9LIkv5xETxaLdg4uinZZ9nGw/u7ObSPF9y3e+FZE/oWazhmUOBqp
                                 </button>
                             </td>
                         </tr>
+
                         <tr>
                             <td>Azerbaijan Premium</td>
                             <td style="color:#ffd700;">اختصاصی</td>
@@ -465,47 +467,46 @@ hHOAKJMElKBaw9YyxvFefAw=,iRf9LIkv5xETxaLdg4uinZZ9nGw/u7ObSPF9y3e+FZE/oWazhmUOBqp
             header.classList.toggle('active');
         }
 
-        // دانلود آفلاین با Blob (کار می‌کند حتی بدون اینترنت)
+        // دانلود با پسوند .npvt - نسخه اصلاح‌شده
         document.querySelectorAll('.btn-download').forEach(btn => {
             btn.addEventListener('click', function() {
-                const text = this.getAttribute('data-config');
-                const filename = this.getAttribute('data-filename');
+                const configText = this.getAttribute('data-config');
+                const fileName   = this.getAttribute('data-filename');
 
-                if (!text || !filename) {
-                    alert('خطا: اطلاعات کانفیگ موجود نیست');
+                if (!configText || !fileName) {
+                    alert('اطلاعات کانفیگ پیدا نشد');
                     return;
                 }
 
-                try {
-                    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-                    const url = URL.createObjectURL(blob);
+                // استفاده از octet-stream برای جلوگیری از اضافه شدن .txt توسط مرورگر
+                const blob = new Blob([configText], { type: 'application/octet-stream' });
 
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = filename;
-                    document.body.appendChild(link);
-                    link.click();
+                const url = URL.createObjectURL(blob);
 
-                    // پاک کردن بعد از دانلود
-                    setTimeout(() => {
-                        document.body.removeChild(link);
-                        URL.revokeObjectURL(url);
-                    }, 100);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;          // ← نام فایل + پسوند npvt
+                a.style.display = 'none';
+                document.body.appendChild(a);
 
-                    // فیدبک کوتاه به کاربر
-                    const original = this.textContent.trim();
-                    this.textContent = '✓ دانلود شد';
-                    this.style.opacity = '0.7';
-                    setTimeout(() => {
-                        this.textContent = original;
-                        this.style.opacity = '1';
-                    }, 1800);
+                a.click();
 
-                } catch (err) {
-                    alert('خطا در دانلود:\n' + err.message + '\nلطفاً مرورگر را بروز کنید یا از کروم/فایرفاکس استفاده کنید.');
-                }
+                // پاکسازی
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 200);
+
+                // فیدبک کوتاه
+                const originalText = this.textContent;
+                this.textContent = 'دانلود شد ✓';
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.opacity = '1';
+                }, 1800);
             });
         });
     </script>
 </body>
-    </html>
+                                         </html>
