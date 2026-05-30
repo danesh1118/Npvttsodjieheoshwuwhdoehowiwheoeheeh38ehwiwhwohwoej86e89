@@ -198,30 +198,6 @@
             box-shadow: 0 15px 40px rgba(0, 136, 204, 0.9);
         }
 
-        .fab-support::before {
-            content: "پشتیبانی";
-            position: absolute;
-            top: -38px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.95em;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .fab-support:hover::before {
-            opacity: 1;
-        }
-
-        .fab-support svg {
-            width: 44px;
-            height: 44px;
-            fill: white;
-        }
-
         .table-wrapper {
             max-width: 900px;
             margin: 0 auto 25px;
@@ -315,8 +291,6 @@
             header h1 { font-size: 2.8em; }
             .tagline { font-size: 1.4em; }
             .fab-support { bottom: 20px; right: 20px; width: 65px; height: 65px; }
-            .fab-support svg { width: 38px; height: 38px; }
-            .table-wrapper { max-width: 100%; }
             th, td { padding: 7px 10px; font-size: 0.92em; }
             .btn-copy { padding: 8px 20px; font-size: 0.9em; min-width: 120px; }
         }
@@ -333,7 +307,7 @@
     <div class="container">
 
         <div class="card">
-            <div class="list-title">لیست کانفیگ‌های رایگن</div>
+            <div class="list-title">لیست کانفیگ‌های رایگان</div>
 
             <div class="table-wrapper">
                 <table>
@@ -347,77 +321,88 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>آلمان OVHcloud ۱ 🇩🇪 - Germany OVHcloud 1</td>
-                            <td style="color:var(--accent-primary);">فعال</td>
-                            <td style="color:#00ff9d;">\~140ms</td>
-                            <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"Germany OVHcloud 1 🇩🇪","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":80,"users":[{"id":"c5fbb5dd-83bb-43ce-a799-e3e5c29e25da","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"gLeEfuL-GrassMcKS7Sr4kw.wiNdleR.co.Uk.","path":"/?ed"},"security":"none"},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"1-1","length":"3-5","interval":"5"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
-                                    کپی کانفیگ
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>آمریکا 🇺🇸 - USA</td>
-                            <td style="color:var(--accent-primary);">فعال</td>
-                            <td style="color:#00ff9d;">\~180ms</td>
-                            <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"USA 🇺🇸","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":2052,"users":[{"id":"5e62ddcf-78c9-4b15-803a-436c8c839ddc","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"oBEDiENt-noiseqJf5ja18yF.wIndLer.CO.UK.","path":"/"},"security":"none"},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"1-1","length":"3-5","interval":"5"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
-                                    کپی کانفیگ
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>آلمان ۳ 🇩🇪 - Germany 3</td>
+                            <td>آلمان 🇩🇪 - Germany</td>
                             <td style="color:var(--accent-primary);">فعال</td>
                             <td style="color:#00ff9d;">\~135ms</td>
                             <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"[\u001a\u001a] [vl-tl-ws] [260218-135853.348]","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":443,"users":[{"id":"9751a75b-b27c-4766-9e67-380599588612","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"afrcloud22.mmv.kr","path":"/138.2.95.61=1111"},"security":"tls","tlsSettings":{"allowInsecure":false,"alpn":[""],"fingerprint":"","serverName":"afrcloud22.mmv.kr","show":false}},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"tlshello","length":"10-20","interval":"10-20"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇩🇪","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"45.130.125.69","port":2096,"users":[{"id":"a9160eba-23cd-407d-8cb3-39a2bc43148c","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"grpc","security":"tls","tlsSettings":{"allowInsecure":true,"serverName":"sHort-aCtIon40S8o1J3v9.SaMSUNgOVEnS.Ir","alpn":["h2","http/1.1"],"fingerprint":"chrome","show":false},"grpcSettings":{"serviceName":"sharghdaily.com.tasnimnews.com.yjc.ir.entekhab.ir.tasnimnews.com.isna.ir.entekhab.ir","authority":"","multiMode":false,"idle_timeout":60,"health_check_timeout":20}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
                                     کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>هلند 🇳🇱 - Netherlands</td>
+                            <td>آفریقای جنوبی 🇿🇦 - South Africa</td>
                             <td style="color:var(--accent-primary);">فعال</td>
-                            <td style="color:#00ff9d;">\~155ms</td>
+                            <td style="color:#00ff9d;">\~210ms</td>
                             <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"Netherlands 🇳🇱","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":443,"users":[{"id":"8ae40bd9-f769-4b1b-bf89-fde9d5afc4c5","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"","path":"/"},"security":"tls","tlsSettings":{"allowInsecure":false,"alpn":[""],"fingerprint":"","serverName":"pmeli.express-servers.ir","show":false}},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"tlshello","length":"10-20","interval":"10-20"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇿🇦","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"shadowsocks","settings":{"servers":[{"address":"4.168.201.246","method":"chacha20-ietf-poly1305","ota":false,"password":"XEnZedp2mkTbT1qC","port":443,"level":8}]},"streamSettings":{"network":"tcp","tcpSettings":{"header":{"type":"none"}}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
                                     کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>آمریکا ۲ 🇺🇸 - USA 2 (VMess)</td>
+                            <td>هلند 🇳🇱 - Netherlands SS</td>
                             <td style="color:var(--accent-primary);">فعال</td>
-                            <td style="color:#00ff9d;">\~170ms</td>
+                            <td style="color:#00ff9d;">\~165ms</td>
                             <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"USA 🇺🇸","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vmess","settings":{"vnext":[{"address":"chatgpt.com","port":443,"users":[{"id":"2c981164-9b93-4bca-94ff-b78d3f8498d7","security":"auto","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"v2ray.codefyinc.com","path":"/vmessws"},"security":"tls","tlsSettings":{"allowInsecure":false,"alpn":[""],"fingerprint":"chrome","serverName":"v2ray.codefyinc.com","show":false}},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"tlshello","length":"10-20","interval":"10-20"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇳🇱","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"shadowsocks","settings":{"servers":[{"address":"82.38.31.35","method":"chacha20-ietf-poly1305","ota":false,"password":"oZIoA69Q8yhcQV8ka3Pa3A","port":8080,"level":8}]},"streamSettings":{"network":"tcp","tcpSettings":{"header":{"type":"none"}}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
                                     کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>فرانسه 🇲🇫 - France</td>
+                            <td>آلمان 🇩🇪 - Germany VMess</td>
                             <td style="color:var(--accent-primary);">فعال</td>
                             <td style="color:#00ff9d;">\~145ms</td>
                             <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"France 🇲🇫","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":443,"users":[{"id":"a9ee8b76-6a94-4c25-9705-76d9bd38771e","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"afrcloud22.mmv.kr","path":"/35.230.79.26=443"},"security":"tls","tlsSettings":{"allowInsecure":false,"alpn":[""],"fingerprint":"","serverName":"afrcloud22.mmv.kr","show":false}},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"tlshello","length":"10-20","interval":"10-20"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇩🇪","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vmess","settings":{"vnext":[{"address":"91.107.179.170","port":2080,"users":[{"id":"cd682302-c9d7-4c0d-bada-52e7d652c22c","security":"auto","level":8}]}]},"streamSettings":{"network":"tcp","tcpSettings":{"header":{"type":"none"}}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
                                     کپی کانفیگ
                                 </button>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>فنلاند 🇫🇮 - Finland</td>
+                            <td>فرانسه 🇫🇷 - France</td>
+                            <td style="color:var(--accent-primary);">فعال</td>
+                            <td style="color:#00ff9d;">\~155ms</td>
+                            <td>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇫🇷","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"79.127.196.11","port":8443,"users":[{"id":"55f7d143-a594-4a91-b030-f227039f85ef","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"tcp","security":"tls","tcpSettings":{"header":{"type":"none"}},"tlsSettings":{"allowInsecure":true,"serverName":"cdg-1.fromblancwithlove.com","alpn":["h2"],"show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>آلمان 🇩🇪 - Germany Trojan</td>
+                            <td style="color:var(--accent-primary);">فعال</td>
+                            <td style="color:#00ff9d;">\~140ms</td>
+                            <td>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇩🇪","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"trojan","settings":{"servers":[{"address":"172.238.120.124","ota":false,"password":"r-_YbwF.j0TtHVewoFIppramjAnmSfqYzJ","port":443,"level":8}]},"streamSettings":{"network":"tcp","security":"tls","tcpSettings":{"header":{"type":"none"}},"tlsSettings":{"allowInsecure":true,"show":false}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>هلند 🇳🇱 - Netherlands Reality</td>
                             <td style="color:var(--accent-primary);">فعال</td>
                             <td style="color:#00ff9d;">\~160ms</td>
                             <td>
-                                <button class="btn btn-copy" data-config='{"dns":{"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"],"dns.403.online":["10.202.10.202","10.202.10.102"],"free.shecan.ir":["178.22.122.100","185.51.200.2"]},"servers":["https://94.140.14.14/dns-query","https://free.shecan.ir/dns-query","https://dns.403.online/dns-query","10.202.10.11","10.202.10.10","85.15.1.15","85.15.1.14","1.1.1.1"],"tag":"dns"},"inbounds":[{"listen":"127.0.0.1","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"destOverride":["http","tls"],"enabled":true,"routeOnly":true},"tag":"socks-in"},{"listen":"127.0.0.1","port":10809,"protocol":"http","settings":{"userLevel":8},"tag":"http-in"},{"listen":"127.0.0.1","port":10853,"protocol":"dokodemo-door","settings":{"address":"chatgpt.com","network":"tcp,udp","port":53},"tag":"dns-in"}],"remarks":"Finland 🇫🇮","log":{"loglevel":"warning"},"outbounds":[{"mux":{"concurrency":-1,"enabled":false,"xudpConcurrency":8,"xudpProxyUDP443":""},"protocol":"vless","settings":{"vnext":[{"address":"chatgpt.com","port":443,"users":[{"id":"a49f214f-9460-44cf-bcc4-08fda8a3f3de","encryption":"none","flow":"","level":8}]}]},"streamSettings":{"sockopt":{"dialerProxy":"fragment","tcpKeepAliveIdle":100,"tcpNoDelay":true},"network":"ws","wsSettings":{"host":"fancy-disk-3455.v2raytv20.workers.dev","path":"/"},"security":"tls","tlsSettings":{"allowInsecure":false,"alpn":[""],"fingerprint":"","serverName":"fancy-disk-3455.v2raytv20.workers.dev","show":false}},"tag":"proxy"},{"protocol":"freedom","settings":{"fragment":{"packets":"tlshello","length":"10-20","interval":"10-20"}},"streamSettings":{"sockopt":{"tcpKeepAliveIdle":100,"TcpNoDelay":true}},"tag":"fragment"},{"protocol":"dns","sockopt":{"dialerProxy":"fragment"},"tag":"dns-out"},{"protocol":"freedom","settings":{"domainStrategy":"UseIP"},"tag":"direct"},{"protocol":"blackhole","settings":{"response":{"type":"http"}},"tag":"block"}],"policy":{"levels":{"8":{"connIdle":300,"downlinkOnly":1,"handshake":4,"uplinkOnly":1}},"system":{"statsOutboundUplink":true,"statsOutboundDownlink":true}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"inboundTag":["dns-in"],"outboundTag":"dns-out"},{"ip":["8.8.8.8"],"outboundTag":"direct","port":"53"},{"outboundTag":"proxy","network":"tcp,udp"}]}}'>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇳🇱","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"162.217.249.72","port":443,"users":[{"id":"d78c12c4-6927-40b8-8550-ed9be00334da","level":8,"encryption":"none","flow":"xtls-rprx-vision"}]}]},"streamSettings":{"network":"tcp","security":"reality","tcpSettings":{"header":{"type":"none"}},"realitySettings":{"allowInsecure":true,"serverName":"nether1cxc.chickenkiller.com","show":false,"publicKey":"MFedImeNi-4keZx_rkV8WL6jjY6sLncSaXgNjpUBPGo","shortId":"8917bfb9900788d5"}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
+                                    کپی کانفیگ
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>فرانسه 🇫🇷 - France VLESS</td>
+                            <td style="color:var(--accent-primary);">فعال</td>
+                            <td style="color:#00ff9d;">\~150ms</td>
+                            <td>
+                                <button class="btn btn-copy" data-config='{"remarks":"🇫🇷","log":{"loglevel":"warning"},"inbounds":[{"tag":"socks","port":10808,"protocol":"socks","settings":{"auth":"noauth","udp":true,"userLevel":8},"sniffing":{"enabled":true,"destOverride":["http","tls"],"routeOnly":false}}],"outbounds":[{"tag":"proxy","protocol":"vless","settings":{"vnext":[{"address":"145.239.173.163","port":443,"users":[{"id":"f8218ac8-0a9b-5d70-a6c8-31936767c357","level":8,"encryption":"none"}]}]},"streamSettings":{"network":"tcp","tcpSettings":{"header":{"type":"none"}}},"mux":{"enabled":false,"concurrency":-1,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"direct","protocol":"freedom","settings":{"domainStrategy":"UseIP"},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}},{"tag":"block","protocol":"blackhole","settings":{"response":{"type":"http"}},"mux":{"enabled":false,"concurrency":8,"xudpConcurrency":8,"xudpProxyUDP443":""}}],"dns":{"servers":["1.1.1.1"],"hosts":{"domain:googleapis.cn":"googleapis.com","dns.alidns.com":["223.5.5.5","223.6.6.6","2400:3200::1","2400:3200:baba::1"],"one.one.one.one":["1.1.1.1","1.0.0.1","2606:4700:4700::1111","2606:4700:4700::1001"],"dot.pub":["1.12.12.12","120.53.53.53"],"dns.google":["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844"],"dns.quad9.net":["9.9.9.9","149.112.112.112","2620:fe::fe","2620:fe::9"],"common.dot.dns.yandex.net":["77.88.8.8","77.88.8.1","2a02:6b8::feed:0ff","2a02:6b8:0:1::feed:0ff"]}},"routing":{"domainStrategy":"IPIfNonMatch","rules":[{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"},{"type":"field","ip":["1.1.1.1"],"outboundTag":"proxy","port":"53"},{"type":"field","ip":["223.5.5.5"],"outboundTag":"direct","port":"53"}]}}'>
                                     کپی کانفیگ
                                 </button>
                             </td>
@@ -433,16 +418,16 @@
             </div>
         </div>
 
-        <!-- آموزش و سوالات متداول -->
+        <!-- بقیه بخش‌ها بدون تغییر -->
         <div class="card">
             <h2>آموزش و سوالات متداول</h2>
-
+            <!-- accordionها همان قبلی -->
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">آموزش وارد کردن کانفیگ در NPV Tunnel</div>
                 <div class="accordion-content">
-                    <p><strong>گام ۱:</strong> اپ NPV Tunnel را باز کنید.</p>
-                    <p><strong>گام ۲:</strong> روی علامت + (افزودن) در پایین صفحه بزنید.</p>
-                    <p><strong>گام ۳:</strong> گزینه Import config from clipboard یا from file را انتخاب کنید.</p>
+                    <p><strong>گام ۱:</strong> اپ NPV Tunnel را باز کنید و سپس وارد بخش Configs بشید</p>
+                    <p><strong>گام ۲:</strong> روی علامت + کلیک کنید معمولا یا در وسط یا در بالا صفحه هست</p>
+                    <p><strong>گام ۳:</strong> گزینه Import config from clipboard یا from file را انتخاب کنید</p>
                     <p><strong>گام ۴:</strong> کانفیگ کپی‌شده را Paste کنید یا فایل را انتخاب نمایید.</p>
                     <p><strong>گام ۵:</strong> کانفیگ اضافه شد → آن را انتخاب کنید و دکمه اتصال را بزنید.</p>
                     <p style="color:#ffcc00; margin-top:15px;">نکته: اگر اتصال برقرار نشد، SNI را چک کنید یا کانفیگ جدید بگیرید.</p>
@@ -469,7 +454,6 @@
             </div>
         </div>
 
-        <!-- دانلود اپ -->
         <div class="card" style="text-align:center;">
             <h2>دانلود NPV Tunnel</h2>
             <div style="margin:40px 0;">
@@ -480,7 +464,7 @@
 
     </div>
 
-    <a href="https://t.me/Leviko_pubg_bot" target="_blank" class="fab-support">
+    <a href="https://t.me/@" target="_blank" class="fab-support">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
             <circle cx="120" cy="120" r="120" fill="white"/>
             <path d="M98 175c-3.89 0-3.26-1.46-4.61-5.15L82 132.2l136-83.3" fill="#0088cc"/>
@@ -506,11 +490,9 @@
             header.classList.toggle('active');
         }
 
-        // کپی به کلیپ‌بورد برای کانفیگ‌های vless
         document.querySelectorAll('.btn-copy').forEach(btn => {
             btn.addEventListener('click', function() {
                 const configText = this.getAttribute('data-config');
-                
                 if (!configText) {
                     alert('کانفیگ پیدا نشد!');
                     return;
@@ -532,4 +514,4 @@
         });
     </script>
 </body>
-    </html>
+                </html>
